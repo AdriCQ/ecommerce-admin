@@ -65,6 +65,8 @@
 <script lang='ts'>
 import { computed, defineAsyncComponent, defineComponent, onBeforeMount, ref } from 'vue';
 import { IDestination, injectStrict, shopInjectionKey } from 'src/modules';
+import { useQuasar } from 'quasar';
+import { uiHelper } from 'src/helpers';
 
 export default defineComponent({
     name: 'DestinationsPage',
@@ -73,6 +75,9 @@ export default defineComponent({
     },
     setup() {
         const $shopStore = injectStrict(shopInjectionKey);
+        const $q = useQuasar();
+        const { errorHandler } = uiHelper($q);
+
         onBeforeMount(() => {
             void $shopStore.listAction();
         })
@@ -113,12 +118,14 @@ export default defineComponent({
             switch (formMode.value) {
                 case 'create':
                     $shopStore.createAction(form.value)
+                        .catch(_e => { errorHandler(_e, 'Error al crear destino') })
                         .finally(() => {
                             editDestinationPopup.value = false;
                         })
                     break;
                 case 'update':
                     $shopStore.updateAction(Number(form.value.id), form.value)
+                        .catch(_e => { errorHandler(_e, 'Error al actualizar destino') })
                         .finally(() => {
                             editDestinationPopup.value = false;
                         })
