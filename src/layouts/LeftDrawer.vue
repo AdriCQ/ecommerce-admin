@@ -57,7 +57,7 @@
                 </q-item>
 
                 <!-- Profile -->
-                <q-item clickable v-ripple>
+                <q-item clickable v-ripple :to="{ name: ROUTE_NAME.CONFIG }">
                     <q-item-section avatar top>
                         <q-avatar size="md" icon="mdi-wrench" color="primary" text-color="dark" />
                     </q-item-section>

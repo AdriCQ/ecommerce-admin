@@ -15,6 +15,7 @@ export function uiHelper($q: QVueGlobals, $router?: Router) {
      * @param _error 
      */
     function errorHandler(_error?: AxiosError<ErrorData>, _default = 'Ha ocurrido un error') {
+        console.log({ _error })
         if (_error && _error.response && _error.response.data) {
             if (_error.response.status === 401) {
                 // Show notification
@@ -27,10 +28,16 @@ export function uiHelper($q: QVueGlobals, $router?: Router) {
                 if ($router) void $router.push({ name: ROUTE_NAME.LOGIN });
             } else {
                 // Show notification
+                // $q.notify({
+                //     type: 'negative',
+                //     icon: 'mdi-alert-circle-outline',
+                //     message: _error.response.data.message,
+                //     position: 'center'
+                // });
                 $q.notify({
                     type: 'negative',
                     icon: 'mdi-alert-circle-outline',
-                    message: _error.response.data.message,
+                    message: _default,
                     position: 'center'
                 });
             }

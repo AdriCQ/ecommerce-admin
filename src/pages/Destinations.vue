@@ -79,7 +79,7 @@ export default defineComponent({
         const { errorHandler } = uiHelper($q);
 
         onBeforeMount(() => {
-            void $shopStore.listAction();
+            void $shopStore.listDestination();
         })
         /**
          * -----------------------------------------
@@ -117,14 +117,14 @@ export default defineComponent({
         function onSubmit() {
             switch (formMode.value) {
                 case 'create':
-                    $shopStore.createAction(form.value)
+                    $shopStore.createDestination(form.value)
                         .catch(_e => { errorHandler(_e, 'Error al crear destino') })
                         .finally(() => {
                             editDestinationPopup.value = false;
                         })
                     break;
                 case 'update':
-                    $shopStore.updateAction(Number(form.value.id), form.value)
+                    $shopStore.updateDestination(Number(form.value.id), form.value)
                         .catch(_e => { errorHandler(_e, 'Error al actualizar destino') })
                         .finally(() => {
                             editDestinationPopup.value = false;
@@ -137,7 +137,7 @@ export default defineComponent({
          */
         function remove(_id?: number) {
             if (_id) {
-                $shopStore.removeAction(_id)
+                $shopStore.deleteDestination(_id)
                     .finally(() => { editDestinationPopup.value = false })
             }
         }

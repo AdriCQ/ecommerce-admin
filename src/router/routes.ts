@@ -8,6 +8,7 @@ const routes: RouteRecordRaw[] = [
         component: MainLayoutVue,
         children: [
             { name: ROUTE_NAME.MAIN, path: '', component: () => import('pages/Index.vue') },
+            { name: ROUTE_NAME.CONFIG, path: 'config', component: () => import('pages/Config.vue') },
             { name: ROUTE_NAME.DESTINATIONS, path: 'destinations', component: () => import('pages/Destinations.vue') }
         ],
     },
