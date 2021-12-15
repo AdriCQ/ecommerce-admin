@@ -23,3 +23,9 @@ export * from './app/store';
 export * from './shop/store';
 export * from './shop/types';
 export * from './shop/service';
+/**
+ * 
+ */
+export * from './user/store';
+export * from './user/service';
+export * from './user/types';
