@@ -6,7 +6,8 @@
             <q-toolbar-title>
                 <q-avatar>
                     <!-- <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" /> -->
-                </q-avatar>Title
+                </q-avatar>
+                {{ appConfig.name }}
             </q-toolbar-title>
         </q-toolbar>
 
@@ -20,7 +21,7 @@
 
 <script lang='ts'>
 import { defineComponent, computed } from 'vue';
-import { appInjectionKey, injectStrict } from 'src/modules';
+import { appInjectionKey, shopInjectionKey, injectStrict } from 'src/modules';
 /**
  * AppHeader
  */
@@ -28,9 +29,11 @@ export default defineComponent({
     name: 'AppHeader',
     setup() {
         const App = injectStrict(appInjectionKey);
+        const $shop = injectStrict(shopInjectionKey);
         // Data
         // const address = computed(() => 'Calle Silencio #32, Palmira, Cienfuegos');
         const leftDrawer = computed(() => App.leftDrawer);
+        const appConfig = computed(() => $shop.config)
         /**
          * -----------------------------------------
          *	Methods
@@ -38,7 +41,7 @@ export default defineComponent({
          */
         function toggleLeftDrawer() { App.toggleLeftDrawer(); }
         return {
-            leftDrawer,
+            leftDrawer, appConfig,
             toggleLeftDrawer
         }
     }

@@ -1,8 +1,8 @@
 <template>
-    <q-card>
-        <q-card-section>
-            <div class="text-h6">{{ destination.name }}</div>
-            <div class="text-subtitle2">{{ Number(destination.price).toFixed(2) }}</div>
+    <q-card style="min-height: 5.8rem;">
+        <q-card-section class="text-grey-9">
+            <div class="text-body2">{{ destination.name }}</div>
+            <div class="text-caption">${{ Number(destination.price).toFixed(2) }}</div>
         </q-card-section>
     </q-card>
 </template>

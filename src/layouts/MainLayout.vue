@@ -12,9 +12,13 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent } from 'vue';
+import { defineComponent, onBeforeMount } from 'vue';
+import { useRouter } from 'vue-router';
+import { useQuasar } from 'quasar';
+import { injectStrict, shopInjectionKey } from 'src/modules';
 import AppHeader from './Header.vue';
 import LeftDrawer from './LeftDrawer.vue';
+import { uiHelper } from 'src/helpers';
 /**
  * MainLayout Component
  */
@@ -24,5 +28,14 @@ export default defineComponent({
         AppHeader,
         LeftDrawer,
     },
+    setup() {
+        const $shop = injectStrict(shopInjectionKey);
+        const $router = useRouter();
+        const $q = useQuasar();
+        const { errorHandler } = uiHelper($q, $router);
+        onBeforeMount(() => {
+            $shop.getConfig().catch(_e => { errorHandler(_e, 'No hay conexión con el servidor') });
+        })
+    }
 });
 </script>

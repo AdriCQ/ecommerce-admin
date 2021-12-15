@@ -8,7 +8,7 @@
     >
         <!-- profile -->
         <div class="text-center q-mt-md gt-xs">
-            <div class="text-grey-9 text-body1">Hola, Usuario</div>
+            <div class="text-grey-9 text-body1">Hola, {{ userProfile.name }}</div>
         </div>
         <!-- / profile -->
 
@@ -74,7 +74,7 @@
 </template>
 
 <script lang='ts'>
-import { appInjectionKey, injectStrict } from 'src/modules';
+import { appInjectionKey, userInjectionKey, injectStrict } from 'src/modules';
 import { computed, defineComponent } from 'vue';
 import { ROUTE_NAME } from 'src/router';
 /**
@@ -85,8 +85,10 @@ export default defineComponent({
     setup() {
         // Init Store
         const App = injectStrict(appInjectionKey);
+        const $user = injectStrict(userInjectionKey);
         // const User = injectStrict(userInjectionKey);
         // Data
+        const userProfile = computed(() => $user.profile);
         const sidebarOpen = computed(() => App.leftDrawer);
         // const userName = computed(() => User.profile.name);
         /**
@@ -101,7 +103,7 @@ export default defineComponent({
 
         return {
             // Data
-            sidebarOpen, ROUTE_NAME,
+            sidebarOpen, ROUTE_NAME, userProfile,
             // Methods
             updateSidebarOpen
         }
