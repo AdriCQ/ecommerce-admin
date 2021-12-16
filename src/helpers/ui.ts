@@ -3,7 +3,7 @@ import { QVueGlobals } from 'quasar';
 import { Router } from 'vue-router';
 import { ErrorData } from 'src/types';
 import { ROUTE_NAME } from 'src/router';
-
+import { userStore } from 'src/modules';
 /**
  * UI Helper
  * @param $q 
@@ -25,6 +25,7 @@ export function uiHelper($q: QVueGlobals, $router?: Router) {
                     message: 'Necesita iniciar sesión o registrarse',
                     position: 'center'
                 });
+                userStore.logout();
                 if ($router) void $router.push({ name: ROUTE_NAME.LOGIN });
             } else {
                 // Show notification

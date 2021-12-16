@@ -8,7 +8,14 @@ declare module '@vue/runtime-core' {
         $axios: AxiosInstance;
     }
 }
-export const baseURL = process.env.DEV ? 'http://localhost:8000/api' : 'https://srv.entuksa.nairda.net';
+let _baseURL = 'http://localhost:8000/api';
+if (!process.env.DEV) {
+    const location = window.location;
+    if (location.hostname !== 'localhost') {
+        _baseURL = location.origin
+    }
+}
+export const baseURL = _baseURL;
 
 const api = axios.create({
     baseURL,

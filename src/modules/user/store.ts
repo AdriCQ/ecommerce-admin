@@ -17,6 +17,7 @@ export class UserStore {
      */
     get apiToken() { return this._apiToken.value; }
     set apiToken(_token: null | string) { this._apiToken.value = _token; }
+    get isAuth() { return Boolean(this.apiToken); }
     /**
      * Gets & Sets profile
      */
@@ -56,6 +57,14 @@ export class UserStore {
                 this.apiToken = json.api_token;
             }
         }
+    }
+    logout() {
+        this.apiToken = null;
+        this.profile = {
+            email: '',
+            name: ''
+        };
+        this.save();
     }
     save() {
         LocalStorage.set('store/User', JSON.stringify({
