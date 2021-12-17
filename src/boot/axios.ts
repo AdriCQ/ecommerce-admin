@@ -8,7 +8,7 @@ declare module '@vue/runtime-core' {
         $axios: AxiosInstance;
     }
 }
-let _baseURL = 'http://localhost:8000/api';
+let _baseURL = 'http://localhost:8000';
 if (!process.env.DEV) {
     const location = window.location;
     if (location.hostname !== 'localhost') {
@@ -18,7 +18,7 @@ if (!process.env.DEV) {
 export const baseURL = _baseURL;
 
 const api = axios.create({
-    baseURL,
+    baseURL: `${baseURL}/api`,
     timeout: 30000,
     timeoutErrorMessage: 'Error en la red',
 });
