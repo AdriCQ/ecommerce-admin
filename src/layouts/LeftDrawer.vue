@@ -7,7 +7,7 @@
         :width="280"
     >
         <!-- profile -->
-        <div class="text-center q-mt-md gt-xs">
+        <div class="text-center q-mt-md">
             <div class="text-grey-9 text-body1">Hola, {{ userProfile.name }}</div>
         </div>
         <!-- / profile -->
@@ -31,7 +31,7 @@
                     </q-item-section>
                 </q-item>
                 <!-- / Mis Pedidos -->
-                <q-item clickable v-ripple>
+                <q-item clickable v-ripple :to="{ name: ROUTE_NAME.PRODUCTS }">
                     <q-item-section avatar top>
                         <q-avatar size="md" icon="mdi-cube" color="primary" text-color="dark" />
                     </q-item-section>
@@ -57,6 +57,22 @@
                 </q-item>
 
                 <!-- Profile -->
+                <q-item clickable v-ripple :to="{ name: ROUTE_NAME.USERS }">
+                    <q-item-section avatar top>
+                        <q-avatar
+                            size="md"
+                            icon="mdi-account-multiple"
+                            color="primary"
+                            text-color="dark"
+                        />
+                    </q-item-section>
+
+                    <q-item-section class="text-grey-9">
+                        <q-item-label lines="1">Colaboradores</q-item-label>
+                    </q-item-section>
+                </q-item>
+                <!-- / Profile -->
+
                 <q-item clickable v-ripple :to="{ name: ROUTE_NAME.CONFIG }">
                     <q-item-section avatar top>
                         <q-avatar size="md" icon="mdi-wrench" color="primary" text-color="dark" />
@@ -66,7 +82,6 @@
                         <q-item-label lines="1">Ajustes</q-item-label>
                     </q-item-section>
                 </q-item>
-                <!-- / Profile -->
             </q-list>
         </div>
         <!-- / list -->

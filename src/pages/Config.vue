@@ -1,6 +1,6 @@
 <template>
     <q-page padding>
-        <q-card>
+        <q-card style="max-width: 30rem;">
             <q-card-section class="text-grey-9">
                 <div class="text-h6">Configuración</div>
                 <div class="text-subtitle2">Modifique la configuración del sitio</div>
@@ -24,7 +24,6 @@
                             <q-input v-model="form.email" type="email" label="Email" />
                             <q-input v-model="form.phone" type="tel" label="Teléfono 1" />
                             <q-input v-model="form.phone_extra" type="tel" label="Teléfono 2" />
-                            <q-input v-model="form.phone_extra" type="tel" label="Teléfono 2" />
                         </q-card-section>
                         <q-card-actions>
                             <q-btn
@@ -44,6 +43,7 @@
 <script lang='ts'>
 import { computed, defineComponent, ref, onBeforeMount } from 'vue';
 import { useQuasar } from 'quasar';
+import { useRouter } from 'vue-router';
 import { uiHelper } from 'src/helpers';
 import { IConfig, injectStrict, shopInjectionKey } from 'src/modules';
 /**
@@ -53,7 +53,8 @@ export default defineComponent({
     name: 'ConfigPage',
     setup() {
         const $q = useQuasar();
-        const { errorHandler } = uiHelper($q);
+        const $router = useRouter();
+        const { errorHandler } = uiHelper($q, $router);
         const $shop = injectStrict(shopInjectionKey);
         onBeforeMount(() => {
             $shop.getConfig().then((_r) => {

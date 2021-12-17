@@ -7,7 +7,8 @@ import { IAuthResponse, IUserLogin, IUserProfile } from './types';
  */
 export class UserStore {
     private readonly $service = new UserService();
-    private _apiToken = ref<null | string>(null)
+    private _apiToken = ref<null | string>(null);
+    private _collaborators = ref<IUserProfile[]>([]);
     private _profile = ref<IUserProfile>({
         email: '',
         name: ''
@@ -17,6 +18,14 @@ export class UserStore {
      */
     get apiToken() { return this._apiToken.value; }
     set apiToken(_token: null | string) { this._apiToken.value = _token; }
+    /**
+     * Gets & Sets collaborators
+     */
+    get collaborators() { return this._collaborators.value; }
+    set collaborators(_col: IUserProfile[]) { this._collaborators.value = _col; }
+    /**
+     * Gets whether is auth
+     */
     get isAuth() { return Boolean(this.apiToken); }
     /**
      * Gets & Sets profile
@@ -28,6 +37,43 @@ export class UserStore {
      *	Actions
      * -----------------------------------------
      */
+    /**
+     * Creates action
+     * @param _profile 
+     * @returns  
+     */
+    async createAction(_profile: IUserProfile) {
+        try {
+            const resp = await this.$service.create(_profile);
+            this.collaborators.push(resp.data);
+            return resp.data;
+        } catch (error) { throw error }
+    }
+    /**
+     * Deletes action
+     * @param _id 
+     * @returns  
+     */
+    async deleteAction(_id: number) {
+        try {
+            const resp = await this.$service.delete(_id);
+            const index = this.collaborators.findIndex(_col => _col.id === _id);
+            this.collaborators.splice(index, 1)
+            return resp.data;
+        } catch (error) { throw error }
+
+    }
+    /**
+     * Lists action
+     * @returns action 
+     */
+    async listAction(): Promise<IUserProfile[]> {
+        try {
+            const resp = await this.$service.list();
+            this.collaborators = resp.data;
+            return resp.data;
+        } catch (error) { throw error; }
+    }
     /**
      * Logins action
      * @param _p 
@@ -41,6 +87,21 @@ export class UserStore {
             this.save();
             return resp.data;
         } catch (error) { throw error }
+    }
+    /**
+     * Updates action
+     * @param _id 
+     * @param _profile 
+     * @returns  
+     */
+    async updateAction(_id: number, _profile: IUserProfile) {
+        try {
+            const resp = await this.$service.update(_id, _profile);
+            const index = this.collaborators.findIndex(_col => _id === _col.id);
+            this.collaborators[index] = resp.data;
+            return resp.data;
+        } catch (error) { throw error }
+
     }
     /**
      * -----------------------------------------

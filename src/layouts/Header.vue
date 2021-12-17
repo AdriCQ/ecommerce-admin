@@ -12,9 +12,9 @@
         </q-toolbar>
 
         <q-tabs align="left">
-            <q-route-tab to="/page1" label="Page One" />
-            <q-route-tab to="/page2" label="Page Two" />
-            <q-route-tab to="/page3" label="Page Three" />
+            <q-route-tab :to="{ name: ROUTE_NAME.MAIN }" label="Inicio" />
+            <q-route-tab :to="{ name: ROUTE_NAME.PRODUCTS }" label="Productos" />
+            <q-route-tab :to="{ name: ROUTE_NAME.DESTINATIONS }" label="Destinos" />
         </q-tabs>
     </q-header>
 </template>
@@ -22,6 +22,7 @@
 <script lang='ts'>
 import { defineComponent, computed } from 'vue';
 import { appInjectionKey, shopInjectionKey, injectStrict } from 'src/modules';
+import { ROUTE_NAME } from 'src/router';
 /**
  * AppHeader
  */
@@ -41,7 +42,7 @@ export default defineComponent({
          */
         function toggleLeftDrawer() { App.toggleLeftDrawer(); }
         return {
-            leftDrawer, appConfig,
+            leftDrawer, appConfig, ROUTE_NAME,
             toggleLeftDrawer
         }
     }

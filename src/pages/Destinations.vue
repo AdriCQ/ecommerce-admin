@@ -1,28 +1,36 @@
 <template>
     <q-page padding class="q-gutter-y-xs">
-        <div class="row q-gutter-sm">
-            <div class="col-xs-12 col-sm-2">
-                <q-card class="cursor-pointer" @click="newDest">
-                    <q-card-section class="text-h6 text-center">
-                        <div>
-                            <q-icon size="lg" name="mdi-plus" />
-                        </div>
-                        <div class="text-subtitle2">Nuevo Destino</div>
-                    </q-card-section>
-                </q-card>
-            </div>
-            <div
-                class="col-xs-12 col-sm-2"
-                v-for="(dest, key) in destinations"
-                :key="`dest-${key}`"
-            >
-                <destination-widget
-                    class="cursor-pointer"
-                    :destination="dest"
-                    @click="editDest(dest)"
-                />
-            </div>
-        </div>
+        <q-card class="text-grey-9">
+            <q-card-section>
+                <div class="text-h6">Mis Destinos</div>
+            </q-card-section>
+            <q-card-section>
+                <div class="row q-gutter-sm">
+                    <div class="col-xs-12 col-sm-3">
+                        <q-card class="cursor-pointer" @click="newDest">
+                            <q-card-section class="text-h6 text-center">
+                                <div>
+                                    <q-icon size="lg" name="mdi-plus" />
+                                </div>
+                                <div class="text-subtitle2">Nuevo Destino</div>
+                            </q-card-section>
+                        </q-card>
+                    </div>
+                    <div
+                        class="col-xs-12 col-sm-3"
+                        v-for="(dest, key) in destinations"
+                        :key="`dest-${key}`"
+                    >
+                        <destination-widget
+                            class="cursor-pointer"
+                            :destination="dest"
+                            @click="editDest(dest)"
+                        />
+                    </div>
+                </div>
+            </q-card-section>
+        </q-card>
+
         <!-- POPUP form -->
         <q-dialog v-model="editDestinationPopup">
             <q-card style="min-width:20rem; width:30rem">
@@ -66,6 +74,7 @@
 import { computed, defineAsyncComponent, defineComponent, onBeforeMount, ref } from 'vue';
 import { IDestination, injectStrict, shopInjectionKey } from 'src/modules';
 import { useQuasar } from 'quasar';
+import { useRouter } from 'vue-router';
 import { uiHelper } from 'src/helpers';
 
 export default defineComponent({
@@ -76,7 +85,8 @@ export default defineComponent({
     setup() {
         const $shopStore = injectStrict(shopInjectionKey);
         const $q = useQuasar();
-        const { errorHandler } = uiHelper($q);
+        const $router = useRouter();
+        const { errorHandler } = uiHelper($q, $router);
 
         onBeforeMount(() => {
             void $shopStore.listDestination();
