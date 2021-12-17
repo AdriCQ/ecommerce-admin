@@ -6,8 +6,8 @@
             </q-card-section>
             <q-form class="q-gutter-md" @submit.prevent="onSubmit">
                 <q-card-section>
-                    <q-input v-model="form.email" type="email" label="Email" />
-                    <q-input v-model="form.password" type="password" label="Password" />
+                    <!-- <q-input v-model="form.email" type="email" label="Email" /> -->
+                    <q-input v-model="form.password" type="password" label="Contraseña" />
                 </q-card-section>
                 <q-card-actions>
                     <q-btn

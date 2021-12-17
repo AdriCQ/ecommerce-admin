@@ -1,6 +1,6 @@
 import { ref, InjectionKey } from 'vue';
 import { ShopService } from './service';
-import { IConfig, IDestination, IProduct } from './types';
+import { IConfig, IDestination, IOrder, IProduct } from './types';
 /**
  * ShopStore
  */
@@ -16,6 +16,7 @@ export class ShopStore {
         phone_extra: ''
     })
     private _destinations = ref<IDestination[]>([]);
+    private _orders = ref<IOrder[]>([]);
     private _products = ref<IProduct[]>([]);
     /**
      * Gets & Sets config
@@ -30,6 +31,11 @@ export class ShopStore {
      * Sets destinations
      */
     set destinations(_d: IDestination[]) { this._destinations.value = _d }
+    /**
+     * Gets & Sets orders
+     */
+    get orders() { return this._orders.value; }
+    set orders(_orders: IOrder[]) { this._orders.value = _orders; }
     /**
      * Gets & Sets products
      */
@@ -81,7 +87,6 @@ export class ShopStore {
             this.destinations.push(resp.data);
             return resp.data;
         } catch (error) { throw error; }
-
     }
     /**
      * Lists shop store
@@ -186,7 +191,22 @@ export class ShopStore {
         const index = this.products.findIndex(_d => _d.id === _id)
         this.products[index] = _d;
     }
-
+    /**
+     * -----------------------------------------
+     *	Orders
+     * -----------------------------------------
+     */
+    /**
+     * Lists order
+     * @returns  
+     */
+    async listOrderAction() {
+        try {
+            const resp = await this.$service.listOrders();
+            this.orders = resp.data;
+            return this.orders;
+        } catch (error) { throw error; }
+    }
 }
 
 

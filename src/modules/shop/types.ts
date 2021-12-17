@@ -29,3 +29,23 @@ export interface IProduct extends DataBase {
     price: number;
     gallery: string[];
 }
+/**
+ * IOrder
+ */
+export interface IOrder extends DataBase {
+    name: string;
+    address: string;
+    phone: string;
+    email: string;
+    total_price: number;
+    order_products: IOrderProduct[];
+}
+/**
+ * Iorder product
+ */
+export interface IOrderProduct {
+    shop_order_id: number;
+    shop_product_id: number;
+    qty: number;
+    product: IProduct;
+}

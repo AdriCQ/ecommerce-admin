@@ -5,8 +5,8 @@ import { ROUTE_NAME } from 'src/router';
  */
 export interface DataBase<T = number> {
     id?: T,
-    createdAt?: string,
-    upadateAt?: string
+    created_at?: string,
+    upadated_at?: string
 }
 /**
  * DataBaseWithImage

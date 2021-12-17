@@ -4,9 +4,9 @@
             <q-btn dense flat round icon="mdi-menu" @click="toggleLeftDrawer" />
 
             <q-toolbar-title>
-                <q-avatar>
-                    <!-- <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" /> -->
-                </q-avatar>
+                <!-- <q-avatar>
+                    <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
+                </q-avatar>-->
                 {{ appConfig.name }}
             </q-toolbar-title>
         </q-toolbar>

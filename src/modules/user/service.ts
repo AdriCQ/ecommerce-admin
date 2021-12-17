@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import { api } from 'src/boot/axios';
-import { IAuthResponse, IUserLogin, IUserProfile } from './types';
+import { IAuthResponse, IUserLogin, IUserProfile, IUpdatePassword } from './types';
 /**
  * User service
  */
@@ -41,4 +41,10 @@ export class UserService {
     update(_id: number, _user: IUserProfile): AxiosPromise<IUserProfile> {
         return api.put(`${this.BASE_PATH}/${_id}`, _user)
     }
+    /**
+     * Updates password
+     * @param _p 
+     * @returns password 
+     */
+    updatePassword(_p: IUpdatePassword): AxiosPromise<void> { return api.post(`${this.BASE_PATH}/update-password`, _p) }
 }

@@ -21,3 +21,9 @@ export interface IAuthResponse {
     profile: IUserProfile;
     api_token: string;
 }
+
+export interface IUpdatePassword {
+    current_password: string;
+    password: string;
+    password_confirmation: string;
+}

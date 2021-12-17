@@ -16,7 +16,7 @@
         <div class="q-gutter-sm q-mt-md">
             <q-list class="rounded-borders" style="max-width: 350px">
                 <!-- Mis Pedidos -->
-                <q-item clickable v-ripple>
+                <q-item clickable v-ripple :to="{ name: ROUTE_NAME.MAIN }">
                     <q-item-section avatar top>
                         <q-avatar
                             size="md"

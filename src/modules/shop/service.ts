@@ -1,11 +1,14 @@
 import { AxiosPromise } from 'axios';
 import { api } from 'src/boot/axios';
-import { IConfig, IDestination, IProduct } from './types';
-
+import { IConfig, IDestination, IProduct, IOrder } from './types';
+/**
+ * Shop service
+ */
 export class ShopService {
     private readonly BASE_PATH = '/shop';
     private readonly CONFIGS_PATH = '/configs';
     private readonly DESTINATION_PATH = '/destinations';
+    private readonly ORDERS_PATH = '/orders';
     private readonly PRODUCT_PATH = '/products';
     /**
      * -----------------------------------------
@@ -87,5 +90,15 @@ export class ShopService {
     updateProduct(_id: number, _p: IProduct): AxiosPromise<IProduct> {
         return api.put(`${this.PRODUCT_PATH}/${_id}`, _p)
     }
+    /**
+     * -----------------------------------------
+     *	Orders services
+     * -----------------------------------------
+     */
+    /**
+     * Lists orders
+     * @returns orders 
+     */
+    listOrders(): AxiosPromise<IOrder[]> { return api.get(this.ORDERS_PATH) }
 
 }

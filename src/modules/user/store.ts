@@ -1,7 +1,7 @@
 import { LocalStorage } from 'quasar';
 import { InjectionKey, ref } from 'vue';
 import { UserService } from './service';
-import { IAuthResponse, IUserLogin, IUserProfile } from './types';
+import { IAuthResponse, IUserLogin, IUserProfile, IUpdatePassword } from './types';
 /**
  * User store
  */
@@ -101,7 +101,12 @@ export class UserStore {
             this.collaborators[index] = resp.data;
             return resp.data;
         } catch (error) { throw error }
-
+    }
+    async updatePasswordAction(_p: IUpdatePassword) {
+        try {
+            await this.$service.updatePassword(_p);
+            this.logout();
+        } catch (error) { throw error }
     }
     /**
      * -----------------------------------------
