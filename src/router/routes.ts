@@ -15,7 +15,9 @@ const routes: RouteRecordRaw[] = [
             { name: ROUTE_NAME.MAIN, path: '', component: () => import('pages/Index.vue') },
             { name: ROUTE_NAME.CONFIG, path: 'config', component: () => import('pages/Config.vue') },
             { name: ROUTE_NAME.DESTINATIONS, path: 'destinations', component: () => import('pages/Destinations.vue') },
-            { name: ROUTE_NAME.PRODUCTS, path: 'product', component: () => import('pages/Product.vue') }
+            { name: ROUTE_NAME.PRODUCTS, path: 'product', component: () => import('pages/Product.vue') },
+            { name: ROUTE_NAME.PRODUCT_EDIT, path: 'product/:id', component: () => import('pages/ProductEdit.vue') },
+            { name: ROUTE_NAME.USERS, path: 'users', component: () => import('pages/Users.vue') }
         ],
     },
     // Login

@@ -1,11 +1,12 @@
 import { AxiosPromise } from 'axios';
 import { api } from 'src/boot/axios';
-import { IConfig, IDestination } from './types';
+import { IConfig, IDestination, IProduct } from './types';
 
 export class ShopService {
     private readonly BASE_PATH = '/shop';
     private readonly CONFIGS_PATH = '/configs';
     private readonly DESTINATION_PATH = '/destinations';
+    private readonly PRODUCT_PATH = '/products';
     /**
      * -----------------------------------------
      *	Configs
@@ -53,6 +54,38 @@ export class ShopService {
      */
     updateDestination(_id: number, _p: IDestination): AxiosPromise<IDestination> {
         return api.put(`${this.DESTINATION_PATH}/${_id}`, _p)
+    }
+
+    /**
+     * -----------------------------------------
+     *	Products
+     * -----------------------------------------
+     */
+    /**
+     * Creates product
+     * @param _p 
+     * @returns product 
+     */
+    createProduct(_p: IProduct): AxiosPromise<IProduct> { return api.post(this.PRODUCT_PATH, _p); }
+    /**
+     * Deletes shop service
+     * @param _id 
+     * @returns delete 
+     */
+    deleteProduct(_id: number): AxiosPromise<IProduct> { return api.delete(`${this.PRODUCT_PATH}/${_id}`) }
+    /**
+     * Lists product
+     * @returns product 
+     */
+    listProduct(): AxiosPromise<IProduct[]> { return api.get(this.PRODUCT_PATH) }
+    /**
+     * Updates product
+     * @param _id 
+     * @param _p 
+     * @returns product 
+     */
+    updateProduct(_id: number, _p: IProduct): AxiosPromise<IProduct> {
+        return api.put(`${this.PRODUCT_PATH}/${_id}`, _p)
     }
 
 }

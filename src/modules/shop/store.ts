@@ -1,10 +1,11 @@
 import { ref, InjectionKey } from 'vue';
 import { ShopService } from './service';
-import { IConfig, IDestination } from './types';
+import { IConfig, IDestination, IProduct } from './types';
 /**
  * ShopStore
  */
 export class ShopStore {
+    private readonly $service = new ShopService();
     private _config = ref<IConfig>({
         address: '',
         currency: 'CUP',
@@ -15,7 +16,7 @@ export class ShopStore {
         phone_extra: ''
     })
     private _destinations = ref<IDestination[]>([]);
-    private readonly $service = new ShopService();
+    private _products = ref<IProduct[]>([]);
     /**
      * Gets & Sets config
      */
@@ -29,6 +30,11 @@ export class ShopStore {
      * Sets destinations
      */
     set destinations(_d: IDestination[]) { this._destinations.value = _d }
+    /**
+     * Gets & Sets products
+     */
+    get products() { return this._products.value; }
+    set products(_p: IProduct[]) { this._products.value = _p; }
     /**
      * -----------------------------------------
      *	Config Actions
@@ -112,6 +118,73 @@ export class ShopStore {
             this.destinations[index] = resp.data;
             return resp.data;
         } catch (error) { throw error; }
+    }
+    /**
+     * -----------------------------------------
+     *	Products Actions
+     * -----------------------------------------
+     */
+
+    findProductById(_id: number): IProduct | undefined {
+        return this.products.find(_p => _p.id === _id);
+    }
+    /**
+     * Creates product
+     * @param _p 
+     * @returns  
+     */
+    async createProductAction(_p: IProduct) {
+        try {
+            const resp = await this.$service.createProduct(_p);
+            this.products.unshift(resp.data);
+            return resp.data;
+        } catch (error) { throw error; }
+    }
+    /**
+     * Deletes product
+     * @param _id 
+     * @returns  
+     */
+    async deleteProductAction(_id: number) {
+        try {
+            await this.$service.deleteProduct(_id);
+            const index = this.products.findIndex(_d => _d.id === _id)
+            return this.products.splice(index, 1)
+        } catch (error) { throw error; }
+    }
+    /**
+     * Lists products
+     * @returns  
+     */
+    async listProductsAction() {
+        try {
+            const resp = await this.$service.listProduct();
+            this.products = resp.data;
+            return this.products;
+        } catch (error) { throw error; }
+    }
+    /**
+     * Updates product
+     * @param _id 
+     * @param _d 
+     * @returns product 
+     */
+    async updateProductAction(_d: IProduct): Promise<IProduct> {
+        try {
+            const _id = Number(_d.id);
+            const resp = await this.$service.updateProduct(_id, _d);
+            this.updateProduct(_id, _d);
+            return resp.data;
+        } catch (error) { throw error; }
+    }
+    /**
+     * Updates product
+     * @param _id 
+     * @param _d 
+     */
+    updateProduct(_id: number, _d: IProduct) {
+        const index = this.products.findIndex(_d => _d.id === _id)
+        this.products[index] = _d;
     }
 
 }
