@@ -6,7 +6,10 @@
                     class="text-h6 text-grey-9"
                 >{{ productId === 0 ? 'Crear' : 'Modificar' }} Producto</div>
             </q-card-section>
-            <q-list bordered class="rounded-borders">
+            <q-card-section v-if="!product.id">
+                <product-form :product="product" />
+            </q-card-section>
+            <q-list bordered class="rounded-borders" v-else>
                 <q-expansion-item expand-separator label="Datos del Producto">
                     <product-form :product="product" />
                 </q-expansion-item>
@@ -44,6 +47,7 @@ export default defineComponent({
             productId.value = $route.params && $route.params.id && !isNaN(Number($route.params.id)) ? Number($route.params.id) : 0;
             if (productId.value === 0) {
                 product.value = {
+                    id: 0,
                     description: '',
                     image: '',
                     name: '',
@@ -67,6 +71,7 @@ export default defineComponent({
          */
         const productId = ref(0);
         const product = ref<IProduct>({
+            id: 0,
             description: '',
             image: '',
             name: '',

@@ -10,7 +10,7 @@
                         <q-card class="cursor-pointer" @click="newDest">
                             <q-card-section class="text-h6 text-center">
                                 <div>
-                                    <q-icon size="lg" name="mdi-plus" />
+                                    <q-icon size="md" name="mdi-plus" />
                                 </div>
                                 <div class="text-subtitle2">Nuevo Destino</div>
                             </q-card-section>
@@ -41,6 +41,7 @@
                         class="float-right"
                         text-color="negative"
                         icon="mdi-delete"
+                        label="Eliminar"
                         @click="remove(form.id)"
                     />
                 </q-card-section>
@@ -86,7 +87,7 @@ export default defineComponent({
         const $shopStore = injectStrict(shopInjectionKey);
         const $q = useQuasar();
         const $router = useRouter();
-        const { errorHandler } = uiHelper($q, $router);
+        const { errorHandler, deleteDialog } = uiHelper($q, $router);
 
         onBeforeMount(() => {
             void $shopStore.listDestination();
@@ -147,8 +148,14 @@ export default defineComponent({
          */
         function remove(_id?: number) {
             if (_id) {
-                $shopStore.deleteDestination(_id)
-                    .finally(() => { editDestinationPopup.value = false })
+                deleteDialog({
+                    title: 'Eliminar Destino',
+                    message: '¿Está seguro que desea eliminar el destino?',
+                    onOk: () => {
+                        $shopStore.deleteDestination(_id)
+                            .finally(() => { editDestinationPopup.value = false })
+                    }
+                });
             }
         }
         return {

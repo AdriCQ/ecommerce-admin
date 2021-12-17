@@ -84,7 +84,7 @@ export default defineComponent({
         const $user = injectStrict(userInjectionKey);
         const $q = useQuasar();
         const $router = useRouter();
-        const { errorHandler } = uiHelper($q, $router);
+        const { errorHandler, deleteDialog } = uiHelper($q, $router);
         onBeforeMount(() => {
             $user.listAction().catch(_e => { errorHandler(_e, 'Error listando usuarios') })
         });
@@ -118,20 +118,19 @@ export default defineComponent({
         }
 
         function remove(_id: number) {
-            loading.value = true;
-
-            $user.deleteAction(_id).then(() => {
-                $q.notify({
-                    type: 'positive',
-                    message: 'Colaborador Eliminado',
-                    icon: 'mdi-account-plus',
-                    position: 'center'
-                })
-            }).catch(_e => {
-                errorHandler(_e, 'Error eliminando colaborador')
-            }).finally(() => {
-                popup.value = false;
-                loading.value = false;
+            deleteDialog({
+                title: 'Eliminar Colaborador',
+                message: '¿Está seguro que desea eliminar el colaborador?',
+                onOk: () => {
+                    loading.value = true;
+                    $user.deleteAction(_id)
+                        .catch(_e => {
+                            errorHandler(_e, 'Error eliminando colaborador')
+                        }).finally(() => {
+                            popup.value = false;
+                            loading.value = false;
+                        })
+                }
             })
         }
         function onSubmit() {

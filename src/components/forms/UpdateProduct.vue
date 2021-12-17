@@ -6,7 +6,7 @@
                     <q-card-section class="q-gutter-y-sm">
                         <q-input v-model="form.name" type="text" label="Nombre" />
                         <div class="text-body2 q-mt-lg">Descripción</div>
-                        <q-editor v-model="form.description" min-height="8rem" />
+                        <q-editor v-model="form.description" min-height="10rem" />
                         <div class="row q-col-gutter-sm">
                             <div class="col-6">
                                 <q-input
@@ -33,7 +33,7 @@
                             text-color="dark"
                             type="submit"
                             icon="mdi-check"
-                            label="Actualizar"
+                            label="Guardar"
                         />
                     </q-card-actions>
                 </q-card>

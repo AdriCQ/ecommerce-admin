@@ -11,6 +11,19 @@ import { userStore } from 'src/modules';
  */
 export function uiHelper($q: QVueGlobals, $router?: Router) {
     /**
+     * Deletes dialog
+     * @param _config 
+     */
+    function deleteDialog(_config: { title?: string, message: string, onOk: CallableFunction }) {
+        $q.dialog({
+            title: _config.title,
+            message: _config.message,
+            ok: true,
+            cancel: true
+
+        }).onOk(() => { _config.onOk() })
+    }
+    /**
      * errorHandler
      * @param _error 
      */
@@ -52,6 +65,6 @@ export function uiHelper($q: QVueGlobals, $router?: Router) {
         }
     }
     return {
-        errorHandler
+        errorHandler, deleteDialog
     }
 }

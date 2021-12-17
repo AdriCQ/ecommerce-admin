@@ -1,5 +1,5 @@
 <template>
-    <q-card style="min-height: 5.8rem;">
+    <q-card>
         <q-card-section class="text-grey-9">
             <div class="text-body2">{{ destination.name }}</div>
             <div class="text-caption">${{ Number(destination.price).toFixed(2) }}</div>
