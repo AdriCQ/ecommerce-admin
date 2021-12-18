@@ -41,6 +41,7 @@
                         <q-input v-model="form.name" type="text" label="Nombre" />
                         <q-input v-model="form.email" type="email" label="Email" />
                         <q-input v-model="form.phone" type="tel" label="Teléfono" />
+                        <q-select v-model="form.type" :options="['RASTREO']" label="Tipo" filled />
                     </q-card-section>
                     <q-card-actions>
                         <q-btn
@@ -97,6 +98,7 @@ export default defineComponent({
             email: '',
             name: '',
             phone: '',
+            type: 'RASTREO'
         })
         const loading = ref(false);
         const mode = ref<'create' | 'update'>('update');
@@ -113,6 +115,7 @@ export default defineComponent({
                 email: '',
                 name: '',
                 phone: '',
+                type: 'RASTREO'
             };
             popup.value = true
         }
@@ -141,7 +144,10 @@ export default defineComponent({
                         type: 'positive',
                         message: 'Colaborador creado',
                         icon: 'mdi-account-plus',
-                        position: 'center'
+                        position: 'center',
+                        actions: [
+                            { icon: 'mdi-close', color: 'white', handler: () => { /* ... */ } }
+                        ]
                     })
                 }).catch(_e => {
                     errorHandler(_e, 'Error creando colaborador')
@@ -156,7 +162,10 @@ export default defineComponent({
                         type: 'positive',
                         message: 'Colaborador Actualizado',
                         icon: 'mdi-account-plus',
-                        position: 'center'
+                        position: 'center',
+                        actions: [
+                            { icon: 'mdi-close', color: 'white', handler: () => { /* ... */ } }
+                        ]
                     })
                 }).catch(_e => {
                     errorHandler(_e, 'Error actualizando colaborador')

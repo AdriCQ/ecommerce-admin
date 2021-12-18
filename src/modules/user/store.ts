@@ -11,7 +11,8 @@ export class UserStore {
     private _collaborators = ref<IUserProfile[]>([]);
     private _profile = ref<IUserProfile>({
         email: '',
-        name: ''
+        name: '',
+        type: 'ADMIN'
     });
     /**
      * Gets & Sets api token
@@ -127,6 +128,7 @@ export class UserStore {
     logout() {
         this.apiToken = null;
         this.profile = {
+            type: 'ADMIN',
             email: '',
             name: ''
         };

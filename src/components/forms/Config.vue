@@ -32,7 +32,7 @@
 
 <script lang='ts'>
 import { computed, defineComponent, ref, onBeforeMount } from 'vue';
-import { useQuasar } from 'quasar';
+import { useMeta, useQuasar } from 'quasar';
 import { useRouter } from 'vue-router';
 import { uiHelper } from 'src/helpers';
 import { IConfig, injectStrict, shopInjectionKey } from 'src/modules';
@@ -76,13 +76,19 @@ export default defineComponent({
         function onSubmit() {
             loading.value = true;
             $shop.updateConfig(form.value)
-                .then(() => {
+                .then((_r) => {
                     $q.notify({
                         icon: 'mdi-check',
                         message: 'Configuración actualizada',
                         position: 'center',
-                        type: 'positive'
-                    })
+                        type: 'positive',
+                        actions: [
+                            { icon: 'mdi-close', color: 'white', handler: () => { /* ... */ } }
+                        ]
+                    });
+                    useMeta({
+                        title: _r.name
+                    });
                 })
                 .catch(_e => { console.log(_e); errorHandler(_e, 'No se pudo actualizar la configuración') }).finally(() => { loading.value = false })
         }

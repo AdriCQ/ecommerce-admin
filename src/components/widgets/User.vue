@@ -3,6 +3,7 @@
         <q-card-section>
             <div class="text-body1">{{ user.name }}</div>
             <div class="text-caption">{{ user.email }}</div>
+            <div class="text-caption">{{ user.type }}</div>
         </q-card-section>
     </q-card>
 </template>

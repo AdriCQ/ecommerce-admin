@@ -33,10 +33,13 @@ export function uiHelper($q: QVueGlobals, $router?: Router) {
             if (_error.response.status === 401) {
                 // Show notification
                 $q.notify({
-                    type: 'warning',
-                    icon: 'mdi-account-off',
-                    message: 'Necesita iniciar sesión o registrarse',
-                    position: 'center'
+                    type: 'negative',
+                    icon: 'mdi-alert-circle-outline',
+                    message: _default,
+                    position: 'center',
+                    actions: [
+                        { icon: 'mdi-close', color: 'white', handler: () => { /* ... */ } }
+                    ]
                 });
                 userStore.logout();
                 if ($router) void $router.push({ name: ROUTE_NAME.LOGIN });
@@ -52,7 +55,10 @@ export function uiHelper($q: QVueGlobals, $router?: Router) {
                     type: 'negative',
                     icon: 'mdi-alert-circle-outline',
                     message: _default,
-                    position: 'center'
+                    position: 'center',
+                    actions: [
+                        { icon: 'mdi-close', color: 'white', handler: () => { /* ... */ } }
+                    ]
                 });
             }
         } else {

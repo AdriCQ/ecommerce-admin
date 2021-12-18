@@ -73,7 +73,10 @@ export default defineComponent({
             $q.notify({
                 message: 'Imagen Actualizada',
                 type: 'positive',
-                position: 'center'
+                position: 'center',
+                actions: [
+                    { icon: 'mdi-close', color: 'white', handler: () => { /* ... */ } }
+                ]
             })
         }
         function factoryFail(p: unknown) { console.log(p) }

@@ -14,7 +14,7 @@
 <script lang='ts'>
 import { defineComponent, onBeforeMount } from 'vue';
 import { useRouter } from 'vue-router';
-import { useQuasar } from 'quasar';
+import { useMeta, useQuasar } from 'quasar';
 import { injectStrict, shopInjectionKey } from 'src/modules';
 import AppHeader from './Header.vue';
 import LeftDrawer from './LeftDrawer.vue';
@@ -34,8 +34,12 @@ export default defineComponent({
         const $q = useQuasar();
         const { errorHandler } = uiHelper($q, $router);
         onBeforeMount(() => {
-            $shop.getConfig().catch(_e => { errorHandler(_e, 'No hay conexión con el servidor') });
-        })
+            $shop.getConfig().then(_r => {
+                useMeta({
+                    title: _r.name
+                });
+            }).catch(_e => { errorHandler(_e, 'No hay conexión con el servidor') });
+        });
     }
 });
 </script>

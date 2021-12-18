@@ -79,7 +79,10 @@ export default defineComponent({
                         $q.notify({
                             message: 'Producto eliminado',
                             type: 'positive',
-                            position: 'center'
+                            position: 'center',
+                            actions: [
+                                { icon: 'mdi-close', color: 'white', handler: () => { /* ... */ } }
+                            ]
                         })
                     }).catch(_e => { errorHandler(_e, 'Error eliminando producto') })
                 }

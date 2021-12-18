@@ -88,7 +88,10 @@ export default defineComponent({
                     $q.notify({
                         message: 'Producto Creado',
                         type: 'positive',
-                        position: 'center'
+                        position: 'center',
+                        actions: [
+                            { icon: 'mdi-close', color: 'white', handler: () => { /* ... */ } }
+                        ]
                     });
                     void $router.push({ name: ROUTE_NAME.PRODUCTS })
                 }).catch(_e => { errorHandler(_e, 'Error creando producto') })
@@ -98,7 +101,10 @@ export default defineComponent({
                     $q.notify({
                         message: 'Producto actualizado',
                         type: 'positive',
-                        position: 'center'
+                        position: 'center',
+                        actions: [
+                            { icon: 'mdi-close', color: 'white', handler: () => { /* ... */ } }
+                        ]
                     });
                     void $router.push({ name: ROUTE_NAME.PRODUCTS })
                 }).catch(_e => { errorHandler(_e, 'Error actualizando producto') })
