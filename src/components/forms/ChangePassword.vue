@@ -18,7 +18,7 @@
                     color="primary"
                     text-color="dark"
                     icon="mdi-lock"
-                    label="Actualizar"
+                    label="Guardar"
                     type="submit"
                 />
             </q-card-actions>

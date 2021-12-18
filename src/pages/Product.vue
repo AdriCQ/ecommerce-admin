@@ -2,18 +2,17 @@
     <q-page padding>
         <q-card>
             <q-card-section>
-                <div class="row q-col-gutter-sm">
-                    <q-card
-                        class="col-xs-12 col-sm-6 col-md-3 col-lg-2 text-grey-9 text-center cursor-pointer"
-                        style="max-height: 6rem;"
-                    >
-                        <q-card-section @click="addProduct">
-                            <div class="text-h6">
-                                <q-icon name="mdi-plus" size="md" />
-                            </div>
-                            <div class="text-subtitle2">Nuevo Producto</div>
-                        </q-card-section>
-                    </q-card>
+                <q-btn
+                    color="primary"
+                    icon="mdi-plus"
+                    class="full-width"
+                    text-color="dark"
+                    label="Nuevo Producto"
+                    @click="addProduct"
+                />
+            </q-card-section>
+            <q-card-section>
+                <div class="row q-col-gutter-sm justify-center">
                     <div
                         class="col-xs-12 col-sm-6 col-md-3 col-lg-2"
                         v-for="(product, pKey) in products"

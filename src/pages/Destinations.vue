@@ -2,20 +2,17 @@
     <q-page padding class="q-gutter-y-xs">
         <q-card class="text-grey-9">
             <q-card-section>
-                <div class="text-h6">Mis Destinos</div>
+                <q-btn
+                    color="primary"
+                    icon="mdi-plus"
+                    class="full-width"
+                    text-color="dark"
+                    label="Añadir Destino"
+                    @click="newDest"
+                />
             </q-card-section>
             <q-card-section>
-                <div class="row q-gutter-sm">
-                    <div class="col-xs-12 col-sm-3">
-                        <q-card class="cursor-pointer" @click="newDest">
-                            <q-card-section class="text-h6 text-center">
-                                <div>
-                                    <q-icon size="md" name="mdi-plus" />
-                                </div>
-                                <div class="text-subtitle2">Nuevo Destino</div>
-                            </q-card-section>
-                        </q-card>
-                    </div>
+                <div class="row q-col-gutter-sm justify-center">
                     <div
                         class="col-xs-12 col-sm-3"
                         v-for="(dest, key) in destinations"
@@ -47,7 +44,6 @@
                 </q-card-section>
                 <q-form @submit.prevent="onSubmit" class="q-gutter-md">
                     <q-card-section>
-                        <q-input v-model="form.name" type="text" label="Nombre" />
                         <q-input
                             v-model="form.price"
                             type="number"
@@ -55,6 +51,7 @@
                             step="0.01"
                             label="Precio"
                         />
+                        <q-input v-model="form.name" type="text" label="Nombre" />
                     </q-card-section>
                     <q-card-actions>
                         <q-btn

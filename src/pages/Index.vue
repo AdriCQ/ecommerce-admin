@@ -2,9 +2,6 @@
     <q-page padding>
         <q-card class="text-grey-9">
             <q-card-section>
-                <div class="text-h6">Pedidos</div>
-            </q-card-section>
-            <q-card-section>
                 <div class="row q-col-gutter-sm">
                     <div
                         v-for="(order, oKey) in orders"

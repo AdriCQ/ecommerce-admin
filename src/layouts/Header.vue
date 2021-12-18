@@ -12,7 +12,7 @@
         </q-toolbar>
 
         <q-tabs align="left">
-            <q-route-tab :to="{ name: ROUTE_NAME.MAIN }" label="Inicio" />
+            <q-route-tab :to="{ name: ROUTE_NAME.MAIN }" label="Pedidos" />
             <q-route-tab :to="{ name: ROUTE_NAME.PRODUCTS }" label="Productos" />
             <q-route-tab :to="{ name: ROUTE_NAME.DESTINATIONS }" label="Destinos" />
         </q-tabs>

@@ -10,11 +10,18 @@
                 <product-form :product="product" />
             </q-card-section>
             <q-list bordered class="rounded-borders" v-else>
-                <q-expansion-item expand-separator label="Datos del Producto">
+                <q-expansion-item expand-separator label="Editar Producto">
                     <product-form :product="product" />
                 </q-expansion-item>
                 <q-expansion-item expand-separator label="Imágenes">
-                    <image-uploader :product="product" @update-product="onImageUpdateProduct" />
+                    <div class="row justify-center">
+                        <image-uploader :product="product" @update-product="onImageUpdateProduct" />
+                    </div>
+                </q-expansion-item>
+                <q-expansion-item expand-separator label="Vista Previa">
+                    <div class="row justify-center">
+                        <product-widget :product="product" with-details />
+                    </div>
                 </q-expansion-item>
             </q-list>
         </q-card>
@@ -23,10 +30,8 @@
 
 <script lang='ts'>
 import { defineAsyncComponent, defineComponent, onBeforeMount, ref } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { injectStrict, IProduct, shopInjectionKey } from 'src/modules';
-import { uiHelper } from 'src/helpers';
-import { useQuasar } from 'quasar';
 /**
  * ProductEditPage
  */
@@ -34,14 +39,12 @@ export default defineComponent({
     name: 'ProductEditPage',
     components: {
         'image-uploader': defineAsyncComponent(() => import('src/components/forms/Image.vue')),
-        'product-form': defineAsyncComponent(() => import('src/components/forms/UpdateProduct.vue'))
+        'product-form': defineAsyncComponent(() => import('src/components/forms/UpdateProduct.vue')),
+        'product-widget': defineAsyncComponent(() => import('src/components/widgets/Product.vue'))
     },
     setup() {
-        const $q = useQuasar();
         const $route = useRoute();
-        const $router = useRouter();
         const $shopStore = injectStrict(shopInjectionKey);
-        const { } = uiHelper($q, $router);
 
         onBeforeMount(() => {
             productId.value = $route.params && $route.params.id && !isNaN(Number($route.params.id)) ? Number($route.params.id) : 0;

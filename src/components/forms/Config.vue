@@ -23,7 +23,7 @@
                     :loading="loading"
                     color="primary"
                     type="submit"
-                    label="Actualizar"
+                    label="Guardar"
                 />
             </q-card-actions>
         </q-form>

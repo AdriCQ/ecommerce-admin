@@ -2,18 +2,17 @@
     <q-page padding>
         <q-card>
             <q-card-section>
-                <div class="text-h6 text-grey-9">Colaboradores</div>
+                <q-btn
+                    color="primary"
+                    icon="mdi-plus"
+                    class="full-width"
+                    text-color="dark"
+                    label="Nuevo Colaborador"
+                    @click="create"
+                />
             </q-card-section>
             <q-card-section>
-                <div class="row q-col-gutter-sm">
-                    <div class="col-xs-12 col-sm-3">
-                        <q-card class="cursor-pointer text-grey-9 text-center" @click="create">
-                            <q-card-section>
-                                <q-icon size="sm" name="mdi-account-plus" />
-                                <div class="text-subtitle2">Nuevo Colaborador</div>
-                            </q-card-section>
-                        </q-card>
-                    </div>
+                <div class="row q-col-gutter-sm justify-center">
                     <div
                         class="col-xs-12 col-sm-3"
                         v-for="(user, key) in users"
