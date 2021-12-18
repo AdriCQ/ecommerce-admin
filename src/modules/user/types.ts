@@ -6,7 +6,7 @@ export interface IUserProfile extends DataBase {
     name: string;
     email: string;
     phone?: string;
-    type: 'RASTREO' | 'ADMIN';
+    type: 'ADMIN' | 'RASTREO' | 'CONTACTO' | 'PEDIDO';
 }
 /**
  * Iuser login

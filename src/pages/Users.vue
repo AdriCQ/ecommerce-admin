@@ -40,7 +40,12 @@
                         <q-input v-model="form.name" type="text" label="Nombre" />
                         <q-input v-model="form.email" type="email" label="Email" />
                         <q-input v-model="form.phone" type="tel" label="Teléfono" />
-                        <q-select v-model="form.type" :options="['RASTREO']" label="Tipo" filled />
+                        <q-select
+                            v-model="form.type"
+                            :options="['RASTREO', 'CONTACTO', 'PEDIDO']"
+                            label="Tipo"
+                            filled
+                        />
                     </q-card-section>
                     <q-card-actions>
                         <q-btn
