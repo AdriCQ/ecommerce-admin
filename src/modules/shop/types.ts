@@ -10,6 +10,7 @@ export interface IConfig {
     phone: string;
     phone_extra: string;
     email: string;
+    description: string;
 }
 /**
  * Idestination

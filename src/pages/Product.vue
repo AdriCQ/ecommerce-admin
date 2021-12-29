@@ -16,7 +16,7 @@
                     <div
                         class="col-xs-12 col-sm-6 col-md-3 col-lg-2"
                         v-for="(product, pKey) in products"
-                        :key="`prod-${pKey}`"
+                        :key="`prod-${product.id}-${pKey}`"
                     >
                         <product-widget :product="product" />
                     </div>

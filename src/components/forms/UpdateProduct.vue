@@ -34,6 +34,7 @@
                             type="submit"
                             icon="mdi-check"
                             label="Guardar"
+                            :loading="loading"
                         />
                     </q-card-actions>
                 </q-card>

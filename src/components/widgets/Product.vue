@@ -107,7 +107,6 @@ export default defineComponent({
          *	Data
          * -----------------------------------------
          */
-
         const slider = ref(0);
         /**
          * -----------------------------------------
@@ -136,7 +135,7 @@ export default defineComponent({
                             actions: [
                                 { icon: 'mdi-close', color: 'white', handler: () => { /* ... */ } }
                             ]
-                        })
+                        });
                     }).catch(_e => { errorHandler(_e, 'Error eliminando producto') })
                 }
             })

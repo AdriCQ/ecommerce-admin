@@ -13,6 +13,7 @@ export class ShopStore {
         name: '',
         open: false,
         phone: '',
+        description: '',
         phone_extra: ''
     })
     private _destinations = ref<IDestination[]>([]);
@@ -153,8 +154,9 @@ export class ShopStore {
     async deleteProductAction(_id: number) {
         try {
             await this.$service.deleteProduct(_id);
-            const index = this.products.findIndex(_d => _d.id === _id)
-            return this.products.splice(index, 1)
+            const index = this.products.findIndex(_d => _d.id === _id);
+            this.products.splice(index, 1);
+            this.products = JSON.parse(JSON.stringify(this.products)) as IProduct[];
         } catch (error) { throw error; }
     }
     /**

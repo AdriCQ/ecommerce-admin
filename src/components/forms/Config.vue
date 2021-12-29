@@ -11,6 +11,7 @@
                     :label="`${form.open ? 'Abierto' : 'Cerrado'}`"
                 />
                 <q-input v-model="form.name" type="text" label="Nombre" />
+                <q-input v-model="form.description" type="textarea" label="Descripción" />
                 <q-input v-model="form.address" type="text" label="Dirección" />
                 <q-select v-model="form.currency" :options="['USD', 'CUP']" label="Moneda" />
                 <q-input v-model="form.email" type="email" label="Email" />
@@ -65,7 +66,8 @@ export default defineComponent({
             name: '',
             open: false,
             phone: '',
-            phone_extra: ''
+            phone_extra: '',
+            description: ''
         });
         const loading = ref(false);
         /**
