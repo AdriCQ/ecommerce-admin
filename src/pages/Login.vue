@@ -12,7 +12,7 @@
         <q-card-actions>
           <q-btn
             :loading="loading"
-            label="Submit"
+            label="Iniciar"
             class="full-width"
             type="submit"
             text-color="dark"

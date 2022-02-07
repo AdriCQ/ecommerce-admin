@@ -8,8 +8,8 @@ declare module '@vue/runtime-core' {
     $axios: AxiosInstance;
   }
 }
-let _baseURL = 'https://ustora.expresscuba.com';
-// let _baseURL = 'http://localhost:8000';
+// let _baseURL = 'https://ustora.expresscuba.com';
+let _baseURL = 'http://localhost:8000';
 if (!process.env.DEV) {
   const location = window.location;
   if (location.hostname !== 'localhost') {
