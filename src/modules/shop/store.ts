@@ -58,9 +58,9 @@ export class ShopStore {
   async getConfig() {
     try {
       const resp = await this.$service.getConfig();
-      this.config = resp.data;
+      this.config = resp.data.config;
       this.config.open = Boolean(this.config.open);
-      return this.config;
+      return resp.data;
     } catch (error) { throw error }
   }
   /**

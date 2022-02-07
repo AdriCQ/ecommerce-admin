@@ -16,6 +16,10 @@ export interface IConfig {
   social_instagram: null | string;
   social_youtube: null | string;
 }
+export interface IGetConfig {
+  config: IConfig;
+  appKey: string;
+}
 /**
  * Idestination
  */

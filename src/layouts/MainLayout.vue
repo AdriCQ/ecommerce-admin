@@ -1,14 +1,14 @@
 <template>
-    <q-layout view="lHh lpR fFf">
-        <app-header />
-        <q-page-container>
-            <router-view />
-        </q-page-container>
+  <q-layout view="lHh lpR fFf">
+    <app-header />
+    <q-page-container>
+      <router-view />
+    </q-page-container>
 
-        <!-- leftDrawer -->
-        <left-drawer />
-        <!-- / leftDrawer -->
-    </q-layout>
+    <!-- leftDrawer -->
+    <left-drawer />
+    <!-- / leftDrawer -->
+  </q-layout>
 </template>
 
 <script lang='ts'>
@@ -23,23 +23,23 @@ import { uiHelper } from 'src/helpers';
  * MainLayout Component
  */
 export default defineComponent({
-    name: 'MainLayout',
-    components: {
-        AppHeader,
-        LeftDrawer,
-    },
-    setup() {
-        const $shop = injectStrict(shopInjectionKey);
-        const $router = useRouter();
-        const $q = useQuasar();
-        const { errorHandler } = uiHelper($q, $router);
-        onBeforeMount(() => {
-            $shop.getConfig().then(_r => {
-                useMeta({
-                    title: _r.name
-                });
-            }).catch(_e => { errorHandler(_e, 'No hay conexión con el servidor') });
+  name: 'MainLayout',
+  components: {
+    AppHeader,
+    LeftDrawer,
+  },
+  setup() {
+    const $shop = injectStrict(shopInjectionKey);
+    const $router = useRouter();
+    const $q = useQuasar();
+    const { errorHandler } = uiHelper($q, $router);
+    onBeforeMount(() => {
+      $shop.getConfig().then(_r => {
+        useMeta({
+          title: _r.config.name
         });
-    }
+      }).catch(_e => { errorHandler(_e, 'No hay conexión con el servidor') });
+    });
+  }
 });
 </script>

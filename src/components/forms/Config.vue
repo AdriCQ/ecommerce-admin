@@ -24,6 +24,9 @@
         <q-input v-model="form.social_youtube" label="Youtube" />
         <q-input v-model="form.social_twitter" label="Twitter" />
       </q-card-section>
+      <q-card-section>
+        <q-input v-model="appKey" label="AppKey" readonly />
+      </q-card-section>
       <q-card-actions>
         <q-btn text-color="dark" :loading="loading" color="primary" type="submit" label="Guardar" />
       </q-card-actions>
@@ -50,7 +53,8 @@ export default defineComponent({
     const $shop = injectStrict(shopInjectionKey);
     onBeforeMount(() => {
       $shop.getConfig().then((_r) => {
-        form.value = _r;
+        form.value = _r.config;
+        appKey.value = _r.appKey;
       }).catch(_e => { errorHandler(_e, 'No se pudo obtener la configuración') })
     })
     /**
@@ -58,6 +62,7 @@ export default defineComponent({
      *	Data
      * -----------------------------------------
      */
+    const appKey = ref('');
     const config = computed(() => $shop.config);
     const form = ref<IConfig>({
       address: '',
@@ -108,7 +113,7 @@ export default defineComponent({
     }
 
     return {
-      config, form, loading, onSubmit
+      appKey, config, form, loading, onSubmit
     }
   }
 });

@@ -1,5 +1,6 @@
 import { AxiosPromise } from 'axios';
 import { api } from 'src/boot/axios';
+import { IGetConfig } from '..';
 import { IConfig, IDestination, IProduct, IOrder } from './types';
 /**
  * Shop service
@@ -19,7 +20,7 @@ export class ShopService {
    * Gets config
    * @returns config 
    */
-  getConfig(): AxiosPromise<IConfig> { return api.get(this.CONFIGS_PATH); }
+  getConfig(): AxiosPromise<IGetConfig> { return api.get(this.CONFIGS_PATH); }
   /**
    * Updates config
    * @param _c 
