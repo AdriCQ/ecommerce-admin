@@ -18,7 +18,7 @@
         </q-expansion-item>
         <q-expansion-item expand-separator label="Vista Previa">
           <div class="row justify-center">
-            <product-widget :product="product" with-details />
+            <product-widget style="width: 25rem;" :product="product" with-details />
           </div>
         </q-expansion-item>
       </q-list>

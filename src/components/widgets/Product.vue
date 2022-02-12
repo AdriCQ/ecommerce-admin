@@ -1,5 +1,5 @@
 <template>
-  <q-card class="text-grey-9" style="width: 25rem;">
+  <q-card class="text-grey-9" style="max-width: 25rem;">
     <q-img
       :src="`${baseURL}${product.image}`"
       :ratio="4 / 3"
