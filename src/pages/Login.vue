@@ -33,7 +33,7 @@ import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { injectStrict, IUserLogin, userInjectionKey } from 'src/modules';
 import { ROUTE_NAME } from 'src/router';
-import { uiHelper } from 'src/helpers';
+import { cryptHash, uiHelper } from 'src/helpers';
 import { useQuasar } from 'quasar';
 /**
  * AuthLoginPage
@@ -54,12 +54,8 @@ export default defineComponent({
 
     function onSubmit() {
       loading.value = true;
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const shaObj = new jsSHA('SHA-512', 'TEXT', { encoding: 'UTF8' });
-      shaObj.update(form.value.password);
-      const password = shaObj.getHash('HEX');
-      // console.log(password);
+      const password = cryptHash(form.value.password);
+      console.log(password);
       $user.loginAction({
         email: form.value.email,
         password

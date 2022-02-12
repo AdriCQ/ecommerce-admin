@@ -5,6 +5,10 @@
         <q-icon name="mdi-delete" />
       </div>
       <div class="text-body2">
+        <q-icon name="mdi-unity" />
+        ID: {{ order.id }}
+      </div>
+      <div class="text-body2">
         <q-icon name="mdi-account" />
         {{ order.name }}
       </div>
@@ -26,12 +30,7 @@
       </div>
     </q-card-section>
     <q-card-section>
-      <q-card
-        class="no-shadow-box"
-        bordered
-        v-for="(op, opKey) in order.order_products"
-        :key="`order-product-${opKey}`"
-      >
+      <q-card bordered v-for="(op, opKey) in order.order_products" :key="`order-product-${opKey}`">
         <q-card-section class="q-py-xs">
           <div class="text-body2">
             <q-chip class="glossy" :label="`x${op.qty}`" />
@@ -62,6 +61,7 @@ export default defineComponent({
     const { order } = toRefs(_props);
     const $q = useQuasar();
     const { errorHandler } = uiHelper($q);
+
 
     function remove() {
       $q.dialog({

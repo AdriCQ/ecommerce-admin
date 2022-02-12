@@ -5,15 +5,15 @@
     </q-card-section>
     <q-form @submit.prevent="onSubmit" class="q-gutter-md">
       <q-card-section class="q-gutter-y-sm">
-        <q-toggle
+        <!-- <q-toggle
           v-model="form.open"
           color="green"
           :label="`${form.open ? 'Abierto' : 'Cerrado'}`"
-        />
+        />-->
         <q-input v-model="form.name" type="text" label="Nombre" />
         <q-input v-model="form.description" type="textarea" label="Descripción" />
         <q-input v-model="form.address" type="text" label="Dirección" />
-        <q-select v-model="form.currency" :options="['USD', 'CUP']" label="Moneda" />
+        <q-input v-model="form.currency" label="Moneda" />
         <q-input v-model="form.email" type="email" label="Email" />
         <q-input v-model="form.phone" type="tel" label="Teléfono 1" />
         <q-input v-model="form.phone_extra" type="tel" label="Teléfono 2" />
@@ -55,6 +55,7 @@ export default defineComponent({
       $shop.getConfig().then((_r) => {
         form.value = _r.config;
         appKey.value = _r.appKey;
+        console.log({ appKey: _r })
       }).catch(_e => { errorHandler(_e, 'No se pudo obtener la configuración') })
     })
     /**

@@ -103,7 +103,7 @@ export default defineComponent({
     const loading = ref(false);
     const mode = ref<'create' | 'update'>('update');
     const popup = ref(false);
-    const users = computed(() => $user.collaborators);
+    const users = computed(() => $user.collaborators.filter(_u => _u.id !== 1));
     /**
      * -----------------------------------------
      *	Methods
