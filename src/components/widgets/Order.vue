@@ -24,6 +24,10 @@
         <q-icon name="mdi-map-marker" />
         {{ order.address }}
       </div>
+      <div class="text-body2">
+        <q-icon name="mdi-calendar-clock" />
+        {{ new Date(order.created_at as string).toLocaleString() }}
+      </div>
       <div class="text-body2 text-bold">
         <q-icon name="mdi-cash-usd" />
         ${{ Number(order.total_price).toFixed(2) }}
