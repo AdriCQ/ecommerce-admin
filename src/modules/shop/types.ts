@@ -15,6 +15,11 @@ export interface IConfig {
   social_twitter: null | string;
   social_instagram: null | string;
   social_youtube: null | string;
+  // Crypto
+  cp_bitcoin: null | string;
+  cp_ethereum: null | string;
+  cp_litecoin: null | string;
+  cp_ripple: null | string;
 }
 export interface IGetConfig {
   config: IConfig;

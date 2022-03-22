@@ -19,6 +19,10 @@ export class ShopStore {
     social_instagram: null,
     social_twitter: null,
     social_youtube: null,
+    cp_bitcoin: null,
+    cp_ethereum: null,
+    cp_litecoin: null,
+    cp_ripple: null,
   })
   private _destinations = ref<IDestination[]>([]);
   private _orders = ref<IOrder[]>([]);
@@ -53,7 +57,7 @@ export class ShopStore {
    */
   /**
    * Gets config
-   * @returns  
+   * @returns
    */
   async getConfig() {
     try {
@@ -65,8 +69,8 @@ export class ShopStore {
   }
   /**
    * updateConfig
-   * @param _c 
-   * @returns 
+   * @param _c
+   * @returns
    */
   async updateConfig(_c: IConfig) {
     try {
@@ -83,8 +87,8 @@ export class ShopStore {
    */
   /**
    * Creates action
-   * @param _d 
-   * @returns action 
+   * @param _d
+   * @returns action
    */
   async createDestination(_d: IDestination): Promise<IDestination> {
     try {
@@ -95,7 +99,7 @@ export class ShopStore {
   }
   /**
    * Lists shop store
-   * @returns list 
+   * @returns list
    */
   async listDestination(): Promise<IDestination[]> {
     try {
@@ -106,8 +110,8 @@ export class ShopStore {
   }
   /**
    * Removes action
-   * @param _id 
-   * @returns action 
+   * @param _id
+   * @returns action
    */
   async deleteDestination(_id: number): Promise<unknown> {
     try {
@@ -118,8 +122,8 @@ export class ShopStore {
   }
   /**
    * Creates action
-   * @param _d 
-   * @returns action 
+   * @param _d
+   * @returns action
    */
   async updateDestination(_id: number, _d: IDestination): Promise<IDestination> {
     try {
@@ -140,8 +144,8 @@ export class ShopStore {
   }
   /**
    * Creates product
-   * @param _p 
-   * @returns  
+   * @param _p
+   * @returns
    */
   async createProductAction(_p: IProduct) {
     try {
@@ -152,8 +156,8 @@ export class ShopStore {
   }
   /**
    * Deletes product
-   * @param _id 
-   * @returns  
+   * @param _id
+   * @returns
    */
   async deleteProductAction(_id: number) {
     try {
@@ -165,7 +169,7 @@ export class ShopStore {
   }
   /**
    * deleteProductGallery
-   * @param _product_id 
+   * @param _product_id
    */
   async deleteProductGallery(_product_id: number) {
     try {
@@ -175,7 +179,7 @@ export class ShopStore {
   }
   /**
    * Lists products
-   * @returns  
+   * @returns
    */
   async listProductsAction() {
     try {
@@ -186,9 +190,9 @@ export class ShopStore {
   }
   /**
    * Updates product
-   * @param _id 
-   * @param _d 
-   * @returns product 
+   * @param _id
+   * @param _d
+   * @returns product
    */
   async updateProductAction(_d: IProduct): Promise<IProduct> {
     try {
@@ -200,8 +204,8 @@ export class ShopStore {
   }
   /**
    * Updates product
-   * @param _id 
-   * @param _d 
+   * @param _id
+   * @param _d
    */
   updateProduct(_id: number, _d: IProduct) {
     const index = this.products.findIndex(_d => _d.id === _id)
@@ -214,7 +218,7 @@ export class ShopStore {
    */
   /**
    * Lists order
-   * @returns  
+   * @returns
    */
   async listOrderAction() {
     try {

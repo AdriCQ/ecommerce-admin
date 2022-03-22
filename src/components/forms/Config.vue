@@ -11,30 +11,54 @@
           :label="`${form.open ? 'Abierto' : 'Cerrado'}`"
         />-->
         <q-input v-model="form.name" type="text" label="Nombre" />
-        <q-input v-model="form.description" type="textarea" label="Descripción" />
+        <q-input
+          v-model="form.description"
+          type="textarea"
+          label="Descripción"
+        />
         <q-input v-model="form.address" type="text" label="Dirección" />
-        <q-input v-model="form.currency" label="Moneda" />
+        <!-- <q-input v-model="form.currency" label="Moneda" /> -->
+        <q-select
+          v-model="form.currency"
+          :options="['CUP', 'USD', 'BTC', 'ETH', 'LTC', 'XRP']"
+          label="Moneda de Pago"
+          filled
+        />
         <q-input v-model="form.email" type="email" label="Email" />
         <q-input v-model="form.phone" type="tel" label="Teléfono 1" />
         <q-input v-model="form.phone_extra" type="tel" label="Teléfono 2" />
       </q-card-section>
       <q-card-section>
+        <div class="text-body1 text-bold">Enlaces Redes Sociales</div>
         <q-input v-model="form.social_facebook" label="Facebook" />
         <q-input v-model="form.social_instagram" label="Instagram" />
         <q-input v-model="form.social_youtube" label="Youtube" />
         <q-input v-model="form.social_twitter" label="Twitter" />
       </q-card-section>
       <q-card-section>
+        <div class="text-body1 text-bold">Wallets</div>
+        <q-input v-model="form.cp_bitcoin" label="Wallet BTC" />
+        <q-input v-model="form.cp_ethereum" label="Wallet ETH" />
+        <q-input v-model="form.cp_litecoin" label="Wallet LTC" />
+        <q-input v-model="form.cp_ripple" label="Wallet XRP" />
+      </q-card-section>
+      <q-card-section>
         <q-input v-model="appKey" label="AppKey" readonly />
       </q-card-section>
       <q-card-actions>
-        <q-btn text-color="dark" :loading="loading" color="primary" type="submit" label="Guardar" />
+        <q-btn
+          text-color="dark"
+          :loading="loading"
+          color="primary"
+          type="submit"
+          label="Guardar"
+        />
       </q-card-actions>
     </q-form>
   </q-card>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { computed, defineComponent, ref, onBeforeMount } from 'vue';
 import { useMeta, useQuasar } from 'quasar';
 import { useRouter } from 'vue-router';
@@ -52,12 +76,17 @@ export default defineComponent({
     const { errorHandler } = uiHelper($q, $router);
     const $shop = injectStrict(shopInjectionKey);
     onBeforeMount(() => {
-      $shop.getConfig().then((_r) => {
-        form.value = _r.config;
-        appKey.value = _r.appKey;
-        console.log({ appKey: _r })
-      }).catch(_e => { errorHandler(_e, 'No se pudo obtener la configuración') })
-    })
+      $shop
+        .getConfig()
+        .then((_r) => {
+          form.value = _r.config;
+          appKey.value = _r.appKey;
+          console.log({ appKey: _r });
+        })
+        .catch((_e) => {
+          errorHandler(_e, 'No se pudo obtener la configuración');
+        });
+    });
     /**
      * -----------------------------------------
      *	Data
@@ -72,12 +101,16 @@ export default defineComponent({
       name: '',
       open: false,
       phone: '',
-      phone_extra: '',
       description: '',
+      phone_extra: '',
       social_facebook: null,
       social_instagram: null,
       social_twitter: null,
       social_youtube: null,
+      cp_bitcoin: null,
+      cp_ethereum: null,
+      cp_litecoin: null,
+      cp_ripple: null,
     });
     const loading = ref(false);
     /**
@@ -87,15 +120,13 @@ export default defineComponent({
      */
     function onSubmit() {
       loading.value = true;
-      if (form.value.social_facebook === '')
-        form.value.social_facebook = null;
-      if (form.value.social_youtube === '')
-        form.value.social_youtube = null;
+      if (form.value.social_facebook === '') form.value.social_facebook = null;
+      if (form.value.social_youtube === '') form.value.social_youtube = null;
       if (form.value.social_instagram === '')
         form.value.social_instagram = null;
-      if (form.value.social_twitter === '')
-        form.value.social_twitter = null;
-      $shop.updateConfig(form.value)
+      if (form.value.social_twitter === '') form.value.social_twitter = null;
+      $shop
+        .updateConfig(form.value)
         .then((_r) => {
           $q.notify({
             icon: 'mdi-check',
@@ -103,19 +134,35 @@ export default defineComponent({
             position: 'center',
             type: 'positive',
             actions: [
-              { icon: 'mdi-close', color: 'white', handler: () => { /* ... */ } }
-            ]
+              {
+                icon: 'mdi-close',
+                color: 'white',
+                handler: () => {
+                  /* ... */
+                },
+              },
+            ],
           });
           useMeta({
-            title: _r.name
+            title: _r.name,
           });
         })
-        .catch(_e => { console.log(_e); errorHandler(_e, 'No se pudo actualizar la configuración') }).finally(() => { loading.value = false })
+        .catch((_e) => {
+          console.log(_e);
+          errorHandler(_e, 'No se pudo actualizar la configuración');
+        })
+        .finally(() => {
+          loading.value = false;
+        });
     }
 
     return {
-      appKey, config, form, loading, onSubmit
-    }
-  }
+      appKey,
+      config,
+      form,
+      loading,
+      onSubmit,
+    };
+  },
 });
 </script>
