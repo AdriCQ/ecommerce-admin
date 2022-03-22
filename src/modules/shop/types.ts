@@ -53,6 +53,7 @@ export interface IOrder extends DataBase {
   email: string;
   total_price: number;
   order_products: IOrderProduct[];
+  pay: boolean;
 }
 /**
  * Iorder product
