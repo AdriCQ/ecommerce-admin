@@ -19,10 +19,8 @@ export class ShopStore {
     social_instagram: null,
     social_twitter: null,
     social_youtube: null,
-    cp_bitcoin: null,
-    cp_ethereum: null,
-    cp_litecoin: null,
-    cp_ripple: null,
+    wallet: null,
+    wallet_type:null
   })
   private _destinations = ref<IDestination[]>([]);
   private _orders = ref<IOrder[]>([]);

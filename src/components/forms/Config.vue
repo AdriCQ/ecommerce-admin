@@ -37,10 +37,8 @@
       </q-card-section>
       <q-card-section>
         <div class="text-body1 text-bold">Wallets</div>
-        <q-input v-model="form.cp_bitcoin" label="Wallet BTC" />
-        <q-input v-model="form.cp_ethereum" label="Wallet ETH" />
-        <q-input v-model="form.cp_litecoin" label="Wallet LTC" />
-        <q-input v-model="form.cp_ripple" label="Wallet XRP" />
+        <q-input v-model="form.wallet_type" label="Tipo de Wallet" />
+        <q-input v-model="form.wallet" label="Wallet" />
       </q-card-section>
       <q-card-section>
         <q-input v-model="appKey" label="AppKey" readonly />
@@ -107,10 +105,8 @@ export default defineComponent({
       social_instagram: null,
       social_twitter: null,
       social_youtube: null,
-      cp_bitcoin: null,
-      cp_ethereum: null,
-      cp_litecoin: null,
-      cp_ripple: null,
+      wallet: null,
+      wallet_type:null
     });
     const loading = ref(false);
     /**
