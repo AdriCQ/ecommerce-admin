@@ -4,7 +4,7 @@ import { DataBase } from 'src/types';
  */
 export interface IConfig {
   name: string;
-  currency: 'USD' | 'CUP';
+  currency: 'USD' | 'CUP' | 'BTC';
   open: boolean;
   address: string;
   phone: string;

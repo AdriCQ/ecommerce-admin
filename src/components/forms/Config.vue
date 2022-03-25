@@ -18,12 +18,12 @@
         />
         <q-input v-model="form.address" type="text" label="Dirección" />
         <!-- <q-input v-model="form.currency" label="Moneda" /> -->
-        <q-select
+        <!-- <q-select
           v-model="form.currency"
           :options="['CUP', 'USD', 'BTC', 'ETH', 'LTC', 'XRP']"
           label="Moneda de Pago"
           filled
-        />
+        /> -->
         <q-input v-model="form.email" type="email" label="Email" />
         <q-input v-model="form.phone" type="tel" label="Teléfono 1" />
         <q-input v-model="form.phone_extra" type="tel" label="Teléfono 2" />
@@ -94,7 +94,7 @@ export default defineComponent({
     const config = computed(() => $shop.config);
     const form = ref<IConfig>({
       address: '',
-      currency: 'CUP',
+      currency: 'BTC',
       email: '',
       name: '',
       open: false,
